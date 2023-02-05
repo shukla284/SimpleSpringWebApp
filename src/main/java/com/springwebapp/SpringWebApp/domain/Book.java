@@ -1,17 +1,14 @@
 package com.springwebapp.SpringWebApp.domain;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Getter @Setter @Builder @ToString
-@Entity
+@Entity @NoArgsConstructor @AllArgsConstructor
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

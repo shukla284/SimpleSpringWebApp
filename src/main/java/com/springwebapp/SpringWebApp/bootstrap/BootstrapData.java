@@ -3,8 +3,10 @@ package com.springwebapp.SpringWebApp.bootstrap;
 
 import com.springwebapp.SpringWebApp.domain.Author;
 import com.springwebapp.SpringWebApp.domain.Book;
+import com.springwebapp.SpringWebApp.domain.Publisher;
 import com.springwebapp.SpringWebApp.repositories.AuthorRepository;
 import com.springwebapp.SpringWebApp.repositories.BookRepository;
+import com.springwebapp.SpringWebApp.repositories.PublisherRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -17,6 +19,8 @@ public class BootstrapData implements CommandLineRunner {
 
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
+
+    private final PublisherRepository publisherRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -31,5 +35,13 @@ public class BootstrapData implements CommandLineRunner {
 
         System.out.println("Saved Books & Authors");
         System.out.printf("Books " + bookRepository.count() + " Authors: " + authorRepository.count());
+
+        // Checking for Publisher
+        Publisher publisher = Publisher.builder().name("XYZ Publishers").address("Street 1, Block 2") .build();
+        publisherRepository.save(publisher);
+
+        publisherRepository.save(publisher);
+        System.out.println("Saved Publisher");
+        System.out.println("Publishers: " + publisherRepository.count());
     }
 }
