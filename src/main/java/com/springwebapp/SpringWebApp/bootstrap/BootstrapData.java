@@ -37,11 +37,21 @@ public class BootstrapData implements CommandLineRunner {
         System.out.printf("Books " + bookRepository.count() + " Authors: " + authorRepository.count());
 
         // Checking for Publisher
-        Publisher publisher = Publisher.builder().name("XYZ Publishers").address("Street 1, Block 2") .build();
+        Publisher publisher = Publisher.builder().name("XYZ Publishers").address("Street 1, Block 2").books(new HashSet<>()).build();
         publisherRepository.save(publisher);
 
         publisherRepository.save(publisher);
         System.out.println("Saved Publisher");
         System.out.println("Publishers: " + publisherRepository.count());
+
+        // Adding book to publisher and vice versa.
+        publisher.getBooks().add(book);
+        book.setPublisher(publisher);
+
+        publisherRepository.save( publisher );
+        bookRepository.save(book);
+
+        System.out.println("Publisher Saved");
+        System.out.println("Publisher: " + publisherRepository.count());
     }
 }
